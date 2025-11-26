@@ -1,0 +1,52 @@
+
+
+
+syntax = "proto3";
+
+package llm;
+
+option java_multiple_files = true;
+option java_package = "com.example.llm";
+option go_package = "github.com/yourorg/llm-protos/gen/go/llm";
+
+message ChatMessage {
+  string role = 1;
+  string content = 2;
+}
+
+message ChatRequest {
+  string request_id = 1; // optional client request id
+  string model = 2;
+  repeated ChatMessage messages = 3;
+  double temperature = 4;
+  int32 max_tokens = 5;
+  bool stream = 6;
+}
+
+message ChatResponse {
+  string request_id = 1;
+  string full_text = 2;
+  string model = 3;
+  string provider = 4;
+  int32 tokens_used = 5;
+  string error = 6;
+}
+
+message ChatResponseChunk {
+  string request_id = 1;
+  string chunk = 2;       // text fragment
+  bool is_final = 3;
+  string provider = 4;
+  int32 tokens_used = 5;  // incremental tokens if available
+}
+
+// Service: unary and server-streaming for completions
+service ChatService {
+  // synchronous completion
+  rpc ChatCompletion(ChatRequest) returns (ChatResponse);
+
+  // server-side streaming (for streaming tokens)
+  rpc ChatCompletionStream(ChatRequest) returns (stream ChatResponseChunk);
+}
+
+

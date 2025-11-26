@@ -1,0 +1,28 @@
+
+
+
+
+syntax = "proto3";
+
+package billing;
+
+message BillRequest {
+  string user_id = 1;
+  string request_id = 2;
+  string model = 3;
+  int32 tokens_used = 4;
+  double cost = 5;
+}
+
+message BillResponse {
+  bool success = 1;
+  double new_balance = 2;
+  string error = 3;
+}
+
+service BillingService {
+  rpc Charge(BillRequest) returns (BillResponse);
+}
+
+
+

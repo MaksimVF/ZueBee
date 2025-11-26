@@ -1,0 +1,36 @@
+
+
+
+
+
+syntax = "proto3";
+
+package cache;
+
+message CacheGetRequest {
+  string key = 1;
+}
+
+message CacheGetResponse {
+  bool hit = 1;
+  string value_json = 2;
+}
+
+message CacheSetRequest {
+  string key = 1;
+  string value_json = 2;
+  int32 ttl_seconds = 3;
+}
+
+message CacheSetResponse {
+  bool stored = 1;
+}
+
+service CacheService {
+  rpc Get(CacheGetRequest) returns (CacheGetResponse);
+  rpc Set(CacheSetRequest) returns (CacheSetResponse);
+}
+
+
+
+

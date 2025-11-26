@@ -1,0 +1,25 @@
+
+
+
+
+syntax = "proto3";
+
+package auth;
+
+message ValidateKeyRequest {
+  string api_key = 1;
+}
+
+message ValidateKeyResponse {
+  bool valid = 1;
+  string user_id = 2;
+  string plan = 3;
+  double balance = 4;
+}
+
+service AuthService {
+  rpc ValidateKey(ValidateKeyRequest) returns (ValidateKeyResponse);
+}
+
+
+
