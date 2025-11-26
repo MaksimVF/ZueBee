@@ -1,0 +1,28 @@
+
+
+
+version: "3.8"
+services:
+  head:
+    build: ./services/head-go
+    environment:
+      - CHAT_ADDR=0.0.0.0:50055
+      - METRICS_PORT=9001
+      - CACHE_ADDR=cache:50053
+      - CACHE_ENABLED=true
+      - PROVIDER_KEYS={"openai":"sk-...","local":""}
+      - FALLBACKS={"gpt-4o":["openai","local"]}
+      - MTLS_ENABLED=1
+      - MTLS_CERT_FILE=/etc/certs/head.crt
+      - MTLS_KEY_FILE=/etc/certs/head.key
+      - MTLS_CA_FILE=/etc/certs/ca.crt
+    volumes:
+      - ./certs:/etc/certs:ro
+    ports:
+      - "50055:50055"
+      - "9001:9001"
+    depends_on:
+      - cache
+
+
+
