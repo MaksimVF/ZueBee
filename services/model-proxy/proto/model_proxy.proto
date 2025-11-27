@@ -1,0 +1,24 @@
+
+
+syntax = "proto3";
+
+package modelproxy;
+
+service ModelProxy {
+  rpc Generate(GenerateRequest) returns (stream GenerateResponse);
+}
+
+message GenerateRequest {
+  string model = 1;
+  string prompt = 2;
+  string user_id = 3;
+  string request_id = 4;
+  map<string, string> metadata = 5;
+}
+
+message GenerateResponse {
+  string chunk = 1;
+  bool done = 2;
+  string error = 3;
+}
+
