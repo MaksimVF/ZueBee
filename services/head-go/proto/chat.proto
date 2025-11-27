@@ -7,7 +7,7 @@ package llm;
 
 option java_multiple_files = true;
 option java_package = "com.example.llm";
-option go_package = "github.com/yourorg/llm-protos/gen/go/llm";
+option go_package = "github.com/yourorg/head/gen/chat";
 
 message ChatMessage {
   string role = 1;

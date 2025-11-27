@@ -7,6 +7,8 @@ syntax = "proto3";
 
 package health;
 
+option go_package = "github.com/yourorg/head/gen/health";
+
 message HealthCheckRequest {
   string service = 1;
 }

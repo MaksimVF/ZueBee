@@ -6,6 +6,8 @@ syntax = "proto3";
 
 package billing;
 
+option go_package = "github.com/yourorg/head/gen/billing";
+
 message BillRequest {
   string user_id = 1;
   string request_id = 2;
