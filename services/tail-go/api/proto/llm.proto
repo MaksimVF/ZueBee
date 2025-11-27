@@ -1,0 +1,26 @@
+
+
+syntax = "proto3";
+
+package llm;
+
+option go_package = "tail-service/api/proto";
+
+service LLMService {
+  rpc Generate (GenerateRequest) returns (stream GenerateResponse);
+}
+
+message GenerateRequest {
+  string model = 1;
+  string prompt = 2;
+  string client_id = 3;
+  string request_id = 4;
+  int32 max_tokens = 5;
+}
+
+message GenerateResponse {
+  string request_id = 1;
+  string chunk = 2;
+  bool is_end = 3;
+}
+
